@@ -1,0 +1,55 @@
+.country__bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 4 columns with equal width */
+  gap: 2rem;
+}
+
+.regionName{
+  text-align: center;
+    font-size: 2em;
+     text-transform: uppercase;
+  color: #fff;
+letter-spacing: 1px;
+  margin-bottom: 20px; 
+}
+
+.country__card {
+  width: 400px;
+  border-radius: 5px;
+  display: flex;
+  background: hsl(209, 23%, 22%);
+  color: #fff;
+}
+.country__card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.country__img img {
+  width: 50px;
+  height: 50px;
+  border-radius:5px;
+  margin: 10px;
+}
+
+.all__country__wrapper {
+    margin: 100px 200px;
+}
+
+.country__data {
+  padding: 10px;
+}
+
+.country__data h3 {
+  font-weight: 500;
+}
+
+.country__data h6 {
+    font-weight: 400;
+  opacity: 80%;
+}
+
+.country__bottom h4 {
+  color: #fff;
+  text-align: center;
+  margin-top: 15px;
+}
