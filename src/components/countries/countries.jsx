@@ -1,33 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import  { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./countries.css";
 import { useTheme } from "../../ThemeContext";
 
-const Countries = ({ countriesData }) => {
-  const [countries, setCountries] = useState([]);
+const Countries = ({ countriesData, isLoading }) => {
   const { isDarkMode } = useTheme();
-
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
-    const sortedCountries = [...countriesData].sort((a, b) => {
-      return a.name.common.localeCompare(b.name.common);
-    });
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
 
-    setCountries(sortedCountries);
-  }, [countriesData]);
+    return () => clearTimeout(timer);
+  }, []);
+  // Check if countriesData is not an array
+  if (countriesData.length === 0 && loading) {
+    // Display loading spinner
+    return (
+      <section className="all__country__wrapper">
+        <div className="loading-spinner"></div>
+      </section>
+    );
+  }
+
+  if (!Array.isArray(countriesData) || countriesData.length === 0) {
+    // Display error message
+    return (
+      <section className="all__country__wrapper">
+        <p className="error-message">No countries data available.</p>
+      </section>
+    );
+  }
+
+  const getCountryCardClass = () => {
+    return isDarkMode ? "country-dark-mode" : "country-light-mode";
+  };
+
   return (
-    <div className="all__country__wrapper">
-      <div className="country__bottom">
-        {countries?.map((country) => (
+    <section className="all__country__wrapper">
+      <section className="country__bottom">
+        {countriesData.map((country) => (
           <Link
             key={country.name.common}
             to={`/country/${country.name.common}`}
           >
-            <div
-              className={`country__card ${
-                isDarkMode ? "country-dark-mode" : "country-light-mode"
-              }`}
-              key={country.name.common}
-            >
+            <div className={`country__card ${getCountryCardClass()}`}>
               <div className="country__img">
                 <img src={country.flags.png} alt="" />
               </div>
@@ -40,8 +59,8 @@ const Countries = ({ countriesData }) => {
             </div>
           </Link>
         ))}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 

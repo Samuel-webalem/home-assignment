@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+import { useTheme } from "../../ThemeContext";
 import "./countriesInformation.css";
 
 
@@ -8,16 +10,10 @@ const apiURL = "https://restcountries.com/v3.1";
 
 const CountryInfo = () => {
   const [country, setCountry] = useState([]);
-  const [error, setError] = useState("");
-  const [viewPort, setViewPort] = useState({
-    latitude: "",
-    longitude: "",
-    zoom: 6,
-  });
-
-
   const { countryName } = useParams();
-
+  const [error, setError] = useState([])
+  const { isDarkMode } = useTheme();
+  
 
   useEffect(() => {
     const getCountryByName = async () => {
@@ -27,6 +23,7 @@ const CountryInfo = () => {
         if (!res.ok) throw new Error("Could not found!");
 
         const data = await res.json();
+
         setCountry(data);
       } catch (error) {
         setError(error.message);
@@ -37,15 +34,23 @@ const CountryInfo = () => {
   }, [countryName]);
 
   return (
-    <div className="country__info__wrapper">
-      <button>
-        <Link to="/">Back</Link>
-      </button>
-
-      {error && <div>{error}</div>}
-
+    <div className={`all-container ${
+            isDarkMode ? "All-dark-mode" : "All-light-mode"
+          }`}>
+      <Link to="/">
+        <FaArrowLeft
+          className={`back ${
+            isDarkMode ? "button-dark-mode" : "button-light-mode"
+          }`}
+        />
+      </Link>
       {country?.map((country, index) => (
-        <div className="country__info__container" key={index}>
+        <div
+          className={`country__info__container ${
+            isDarkMode ? "countryinfo-dark-mode" : "countryinfo-light-mode"
+          }`}
+          key={index}
+        >
           <div className="country__info-img">
             <img src={country.flags.png} alt={country.name.common} />
           </div>

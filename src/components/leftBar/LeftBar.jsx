@@ -20,48 +20,50 @@ const LeftBar = ({ onSelect }) => {
   };
 
   return (
-    <ul>
-      <li
-        className={`option ${
-          isDarkMode ? "left-dark-mode" : "left-light-mode"
-        }`}
-        onClick={() => selectHandler("Africa")}
-      >
-        Africa
-      </li>
-      <li
-        className={`option ${
-          isDarkMode ? "left-dark-mode" : "left-light-mode"
-        }`}
-        onClick={() => selectHandler("America")}
-      >
-        America
-      </li>
-      <li
-        className={`option ${
-          isDarkMode ? "left-dark-mode" : "left-light-mode"
-        }`}
-        onClick={() => selectHandler("Asia")}
-      >
-        Asia
-      </li>
-      <li
-        className={`option ${
-          isDarkMode ? "left-dark-mode" : "left-light-mode"
-        }`}
-        onClick={() => selectHandler("Europe")}
-      >
-        Europe
-      </li>
-      <li
-        className={`option ${
-          isDarkMode ? "left-dark-mode" : "left-light-mode"
-        }`}
-        onClick={() => selectHandler("Oceania")}
-      >
-        Oceania
-      </li>
-    </ul>
+    <div className="left-container">
+      <ul className={isDarkMode ? "left-ul-dark-mode" : "left-ul-light-mode"}>
+        <li
+          className={`option ${
+            isDarkMode ? "left-dark-mode" : "left-light-mode"
+          }`}
+          onClick={() => selectHandler("Africa")}
+        >
+          Africa
+        </li>
+        <li
+          className={`option ${
+            isDarkMode ? "left-dark-mode" : "left-light-mode"
+          }`}
+          onClick={() => selectHandler("America")}
+        >
+          America
+        </li>
+        <li
+          className={`option ${
+            isDarkMode ? "left-dark-mode" : "left-light-mode"
+          }`}
+          onClick={() => selectHandler("Asia")}
+        >
+          Asia
+        </li>
+        <li
+          className={`option ${
+            isDarkMode ? "left-dark-mode" : "left-light-mode"
+          }`}
+          onClick={() => selectHandler("Europe")}
+        >
+          Europe
+        </li>
+        <li
+          className={`option ${
+            isDarkMode ? "left-dark-mode" : "left-light-mode"
+          }`}
+          onClick={() => selectHandler("Oceania")}
+        >
+          Oceania
+        </li>
+      </ul>
+    </div>
   );
 };
 

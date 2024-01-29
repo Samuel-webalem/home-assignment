@@ -2,12 +2,32 @@
     height: 100%;
     width: 100%;
     padding: 20px;
-    align-items: center;
-   border: solid;
-   background: rgba(66, 84, 88, 0.082);
+  background: #d2e3c86d;
+   display: flex;
+   border-radius: 10px;
 }
+.All-dark-mode{      
+   background: #b2c8ba6c;
 
-
+}
+.All-light-mode{
+  background: #d2e3c818;
+}
+.countryinfo-dark-mode{
+  color:black;
+}
+.countryinfo-light-mode{  
+   color:#fcfcfc;
+}
+.all-container{
+  border-radius: 10px;
+  border: 10px;
+}
+.country__info__container{
+  width: 80%;
+  margin-left: 30%;
+  padding: 50px;
+}
 
 .country__info-img,
 .country__info {
@@ -15,34 +35,34 @@
 }
 a {
   text-decoration: none;
-  color: #fff;
 }
 
 .country__info h3 {
-  color: #fff;
   font-size: 1.3rem;
   margin-bottom: 30px;
 }
 
 .country__info-left h5 {
-  color: #fff;
   font-size: 0.9rem;
   font-weight: 400;
   margin-bottom: 10px;
 }
 .country__info-left h5 span {
-  color: #fff;
   opacity: 85%;
   font-weight: 400;
 }
-button {
-  padding: 10px 25px;
-  color: #fff;
-  background: hsl(209, 23%, 22%);
-  border: none;
+.back{
   outline: none;
   cursor: pointer;
-  width: 120px;
-  border-radius: 5px;
-  margin-bottom: 50px;
+  height: 80px;
+  width: 50px;
+  float: left;
+  padding: 10px;
+  margin-left: 20px;
+}
+.button-light-mode{
+color: #beafaf;
+}
+.button-dark-mode{
+color: #060606;
 }

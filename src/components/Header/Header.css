@@ -3,23 +3,18 @@
   position: fixed;
   padding:15px 15px;
   display: flex;
+  height: 80px;
 }
 .dark-mode{
     background: #040D12;
     color:white;
-}
-.dark-mode div .search-container{
-    background-color:#091922;
 }
 .dark-mode div div .input{
 color: white;
 }
 
 .light-mode{
-    background: #B2C8BA;
-}
-.light-mode div .search-container{
-    background-color:#D2E3C8;
+    background: #b2c8ba6c;
 }
 
 .container{
@@ -29,8 +24,9 @@ color: white;
      width:100%;
 }
 .search-container{
-    width:100%;
+    width: 300px;
     border-radius:10px;
+  background: hsla(208, 23%, 22%, 0.45);
     height: 2.5rem;
     padding:0 15px;
     display:flex;
@@ -56,6 +52,19 @@ input {
   width:100%;
   margin-left:10px;
 }
+select {
+  padding: 10px 25px; 
+   background: hsla(208, 23%, 22%, 0.45);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
 input:focus{
     outline:none;
+}
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Adjust the placeholder color as needed */
 }
