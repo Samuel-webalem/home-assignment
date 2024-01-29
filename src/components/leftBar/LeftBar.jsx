@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./LeftBar.css";
-import {} from "react-icons/fa";
 import { useTheme } from "../../ThemeContext";
 
 const apiURL = "https://restcountries.com/v3.1";
@@ -8,6 +7,7 @@ const apiURL = "https://restcountries.com/v3.1";
 const LeftBar = ({ onSelect }) => {
   const [error, setError] = useState("");
   const { isDarkMode } = useTheme();
+
   const selectHandler = async (regionName) => {
     try {
       const res = await fetch(`${apiURL}/region/${regionName}`);
@@ -66,5 +66,4 @@ const LeftBar = ({ onSelect }) => {
     </div>
   );
 };
-
 export default LeftBar;

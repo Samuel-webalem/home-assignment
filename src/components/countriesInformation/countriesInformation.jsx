@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useTheme } from "../../ThemeContext";
 import "./countriesInformation.css";
-
 
 const apiURL = "https://restcountries.com/v3.1";
 
 const CountryInfo = () => {
   const [country, setCountry] = useState([]);
   const { countryName } = useParams();
-  const [error, setError] = useState([])
+  const [error, setError] = useState([]);
   const { isDarkMode } = useTheme();
-  
 
   useEffect(() => {
     const getCountryByName = async () => {
       try {
         const res = await fetch(`${apiURL}/name/${countryName}`);
 
-        if (!res.ok) throw new Error("Could not found!");
+        if (!res.ok) throw new Error("Could not be found!");
 
         const data = await res.json();
 
@@ -34,9 +31,11 @@ const CountryInfo = () => {
   }, [countryName]);
 
   return (
-    <div className={`all-container ${
-            isDarkMode ? "All-dark-mode" : "All-light-mode"
-          }`}>
+    <div
+      className={`all-container ${
+        isDarkMode ? "All-dark-mode" : "All-light-mode"
+      }`}
+    >
       <Link to="/">
         <FaArrowLeft
           className={`back ${
@@ -44,6 +43,7 @@ const CountryInfo = () => {
           }`}
         />
       </Link>
+
       {country?.map((country, index) => (
         <div
           className={`country__info__container ${
@@ -65,12 +65,11 @@ const CountryInfo = () => {
                   {new Intl.NumberFormat().format(country.population)}
                 </span>
               </h5>
-
               <h5>
                 Region: <span>{country.region}</span>
               </h5>
               <h5>
-                Sub Region: <span>{country.subregion}</span>
+                Subregion: <span>{country.subregion}</span>
               </h5>
               <h5>
                 Capital: <span>{country.capital}</span>
@@ -85,7 +84,6 @@ const CountryInfo = () => {
       ))}
     </div>
   );
-
 };
 
 export default CountryInfo;

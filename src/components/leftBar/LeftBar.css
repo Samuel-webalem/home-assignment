@@ -9,12 +9,15 @@ ul {
   margin-top: 80px;
   position: fixed;
 }
-.left-ul-dark-mode{
-       background: #b2c8ba6c;
+
+.left-ul-dark-mode {
+  background: #b2c8ba6c;
 }
-.left-ul-light-mode{
-  background: #040D12;
+
+.left-ul-light-mode {
+  background: #040d12;
 }
+
 li {
   cursor: pointer;
   padding: 20px 20px;
@@ -26,9 +29,11 @@ li {
 .option {
   font-weight: bold;
 }
+
 .left-dark-mode:hover {
-    background: #0909093b;
+  background: #0909093b;
 }
+
 .left-light-mode:hover {
-    background: #0d1c22;
+  background: #0d1c22;
 }

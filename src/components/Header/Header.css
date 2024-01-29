@@ -1,60 +1,67 @@
 .header {
   width: 100%;
   position: fixed;
-  padding:15px 15px;
+  padding: 15px;
   display: flex;
   height: 80px;
 }
-.dark-mode{
-    background: #040D12;
-    color:white;
-}
-.dark-mode div div .input{
-color: white;
+
+.dark-mode {
+  background: #040d12;
+  color: white;
 }
 
-.light-mode{
-    background: #b2c8ba6c;
+.dark-mode .input {
+  color: white;
 }
 
-.container{
-     display: flex;
-     justify-content:space-between;
-     margin:0 100px;
-     width:100%;
+.light-mode {
+  background: #b2c8ba6c;
 }
-.search-container{
-    width: 300px;
-    border-radius:10px;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 100px;
+  width: 100%;
+}
+
+.search-container {
+  width: 300px;
+  border-radius: 10px;
   background: hsla(208, 23%, 22%, 0.45);
-    height: 2.5rem;
-    padding:0 15px;
-    display:flex;
-    align-items:center;
+  height: 2.5rem;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
 }
-.theme{
-    display:flex;
-    cursor: pointer;
-    align-items: center;
-    gap:10px;
+
+.theme {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  gap: 10px;
 }
+
 .header h5 {
   display: flex;
   align-items: center;
   font-size: 1.3rem;
 }
+
 input {
-  background-color:transparent;
-  border:none;
-  height:100%;
-  font-size:1.25rem;
-  padding:0 10px;
-  width:100%;
-  margin-left:10px;
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  font-size: 1.25rem;
+  padding: 0 10px;
+  width: 100%;
+  margin-left: 10px;
 }
+
 select {
-  padding: 10px 25px; 
-   background: hsla(208, 23%, 22%, 0.45);
+  padding: 10px 25px;
+  background: hsla(208, 23%, 22%, 0.45);
   border: none;
   outline: none;
   border-radius: 5px;
@@ -62,9 +69,10 @@ select {
   cursor: pointer;
 }
 
-input:focus{
-    outline:none;
+input:focus {
+  outline: none;
 }
+
 input::placeholder {
-  color: rgba(255, 255, 255, 0.7); /* Adjust the placeholder color as needed */
+  color: rgba(255, 255, 255, 0.7);
 }

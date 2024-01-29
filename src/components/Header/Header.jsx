@@ -1,4 +1,3 @@
-// Header.js
 import React, { useState } from "react";
 import "./Header.css";
 import { FaSearch, FaMoon, FaSun, FaTimes } from "react-icons/fa";
@@ -9,7 +8,7 @@ const apiURL = "https://restcountries.com/v3.1";
 export default function Header({ onSelect, onThemeChange }) {
   const [countryName, setInput] = useState("");
   const [error, setError] = useState({ status: false, message: "" });
-  const [sortOption, setSortOption] = useState("Relevant"); // Default sort option is by name
+  const [sortOption, setSortOption] = useState("Relevant");
   const { toggleTheme, isDarkMode } = useTheme();
 
   const validateInput = (input) => {
@@ -29,10 +28,8 @@ export default function Header({ onSelect, onThemeChange }) {
     return true;
   };
 
-
   const submitHandler = async () => {
     if (!validateInput(countryName)) {
-      // If input is empty, fetch all countries
       const allCountriesRes = await fetch(`${apiURL}/all`);
       const allCountriesData = await allCountriesRes.json();
       onSelect(allCountriesData);
@@ -47,7 +44,7 @@ export default function Header({ onSelect, onThemeChange }) {
           status: true,
           message: "Country not found!",
         });
-        onSelect([]); // Clear the countries data when no country is found
+        onSelect([]);
         return;
       }
 
@@ -57,7 +54,6 @@ export default function Header({ onSelect, onThemeChange }) {
       });
 
       const data = await res.json();
-      // Send countries data to the parent component
       onSelect(data);
     } catch (error) {
       setError({
@@ -88,10 +84,10 @@ export default function Header({ onSelect, onThemeChange }) {
     setSortOption(value);
 
     try {
-      // Fetch all countries and sort based on the selected option
       const res = await fetch(`${apiURL}/all`);
       let data = await res.json();
       const seter = data;
+
       if (value === "name") {
         data.sort((a, b) => a.name.common.localeCompare(b.name.common));
       } else if (value === "population") {
@@ -100,7 +96,6 @@ export default function Header({ onSelect, onThemeChange }) {
         data = seter;
       }
 
-      // Send sorted countries data to the parent component
       onSelect(data);
     } catch (error) {
       console.error("Error fetching and sorting countries:", error);
@@ -130,7 +125,7 @@ export default function Header({ onSelect, onThemeChange }) {
             onChange={(e) => handleSortChange(e.target.value)}
           >
             <option value="" className="option">
-              Relevalnt
+              Relevant
             </option>
             <option value="name" className="option">
               Name

@@ -1,9 +1,10 @@
 .country__bottom {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  position: relative;/* 4 columns with equal width */
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
   gap: 2rem;
 }
+
 .error-message {
   position: absolute;
   top: 50%;
@@ -14,31 +15,34 @@
   font-size: 1.2rem;
   text-align: center;
 }
+
 .country__card {
   width: 380px;
   border-radius: 5px;
   display: flex;
 }
-.country-dark-mode{
+
+.country-dark-mode {
   background: #d2e3c886;
-  color:black
+  color: black;
 }
-.country-light-mode{
-background: #0d1c22;
-color: white;
+
+.country-light-mode {
+  background: #0d1c22;
+  color: white;
 }
+
 .country__card:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .country__img img {
   width: 50px;
   height: 50px;
-  border-radius:5px;
+  border-radius: 5px;
   margin: 10px;
 }
-
-
 
 .country__data {
   padding: 10px;
@@ -49,14 +53,14 @@ color: white;
 }
 
 .country__data h6 {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .country__bottom h4 {
   text-align: center;
   margin-top: 15px;
 }
-/* Add these styles for the loading spinner */
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
