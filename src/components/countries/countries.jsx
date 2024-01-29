@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./countries.css";
+import { useTheme } from "../../ThemeContext";
 
-const Countries = ({ countriesData,regionData }) => {
+const Countries = ({ countriesData }) => {
   const [countries, setCountries] = useState([]);
-  const [region, setRegion] = useState([]);
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
-  setRegion(regionData);
-  }, [regionData])
-  
-  useEffect(() => {
-   const sortedCountries = [...countriesData].sort((a, b) => {
+    const sortedCountries = [...countriesData].sort((a, b) => {
       return a.name.common.localeCompare(b.name.common);
     });
 
@@ -19,14 +16,18 @@ const Countries = ({ countriesData,regionData }) => {
   }, [countriesData]);
   return (
     <div className="all__country__wrapper">
-      <h6 className='regionName'>{region}</h6>
       <div className="country__bottom">
         {countries?.map((country) => (
           <Link
             key={country.name.common}
             to={`/country/${country.name.common}`}
           >
-            <div className="country__card" key={country.name.common}>
+            <div
+              className={`country__card ${
+                isDarkMode ? "country-dark-mode" : "country-light-mode"
+              }`}
+              key={country.name.common}
+            >
               <div className="country__img">
                 <img src={country.flags.png} alt="" />
               </div>

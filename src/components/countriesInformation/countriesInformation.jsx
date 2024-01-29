@@ -9,6 +9,12 @@ const apiURL = "https://restcountries.com/v3.1";
 const CountryInfo = () => {
   const [country, setCountry] = useState([]);
   const [error, setError] = useState("");
+  const [viewPort, setViewPort] = useState({
+    latitude: "",
+    longitude: "",
+    zoom: 6,
+  });
+
 
   const { countryName } = useParams();
 
@@ -21,7 +27,6 @@ const CountryInfo = () => {
         if (!res.ok) throw new Error("Could not found!");
 
         const data = await res.json();
-
         setCountry(data);
       } catch (error) {
         setError(error.message);
@@ -37,12 +42,12 @@ const CountryInfo = () => {
         <Link to="/">Back</Link>
       </button>
 
-      {error && { error }}
+      {error && <div>{error}</div>}
 
       {country?.map((country, index) => (
         <div className="country__info__container" key={index}>
           <div className="country__info-img">
-            <img src={country.flags.png} alt="" />
+            <img src={country.flags.png} alt={country.name.common} />
           </div>
 
           <div className="country__info">
@@ -55,6 +60,7 @@ const CountryInfo = () => {
                   {new Intl.NumberFormat().format(country.population)}
                 </span>
               </h5>
+
               <h5>
                 Region: <span>{country.region}</span>
               </h5>
@@ -64,12 +70,17 @@ const CountryInfo = () => {
               <h5>
                 Capital: <span>{country.capital}</span>
               </h5>
+              <h5>
+                Languages:{" "}
+                <span>{Object.values(country.languages).join(", ")}</span>
+              </h5>
             </div>
           </div>
         </div>
       ))}
     </div>
   );
+
 };
 
 export default CountryInfo;

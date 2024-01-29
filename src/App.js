@@ -6,6 +6,8 @@ import CountryInfo from "./components/countriesInformation/countriesInformation"
 import Header from "./components/Header/Header";
 import LeftBar from "./components/leftBar/LeftBar";
 
+import { useTheme } from "./ThemeContext";
+
 const apiURL = "https://restcountries.com/v3.1";
 
 async function fetchData() {
@@ -20,9 +22,9 @@ async function fetchData() {
 }
 
 function App() {
-  const [selectedRegion, setSelectedRegion] = useState("all");
   const [countriesData, setCountriesData] = useState([]);
   const [error, setError] = useState("");
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     fetchData()
@@ -32,22 +34,25 @@ function App() {
       .catch((error) => {
         setError(error.message);
       });
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+  }, []);
 
-  const getCountryByRegion = async (regionName, data) => {
-    setSelectedRegion(regionName);
+  const getCountryByRegion = async (data) => {
     setCountriesData(data);
   };
-
   const searchCountry = async (data) => {
     setCountriesData(data);
   };
+
   return (
     <>
       <div className="top">
         <Header onSelect={searchCountry} />
       </div>
-      <div className="container">
+      <div
+        className={`containerr ${
+          isDarkMode ? "App-dark-mode" : "App-light-mode"
+        }`}
+      >
         <div className="left">
           <LeftBar onSelect={getCountryByRegion} />
         </div>
@@ -57,14 +62,9 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <Countries
-                    countriesData={countriesData}
-                    regionData={selectedRegion}
-                  />
-                }
+                element={<Countries countriesData={countriesData} />}
               />
-              <Route path="/country/:countryName" element={<CountryInfo />} />
+              <Route path="/country/:countryName" className='info' element={<CountryInfo />} />
             </Routes>
           </Router>
         </div>

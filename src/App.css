@@ -7,18 +7,33 @@
   font-family: "Lora", serif;
 }
 
-.container {
+.containerr {
   display: flex;
-  width: 1140px;
+  overflow: hidden;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
   padding: 0px 15px;
+ 
+}
+.App-dark-mode{
+  color:black;
+  background:#EBF3E8;
+}
+.App-light-mode{
+ color: #fff;
+  background: #071015;
 }
 
-body {
-  background: hsl(207, 26%, 17%);
+body{
+  background: #071015;
 }
-
-
-
+.right{
+    margin: 70px 150px;
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+}
 
 
 

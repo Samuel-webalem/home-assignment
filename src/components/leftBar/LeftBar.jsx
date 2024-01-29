@@ -1,37 +1,64 @@
 import React, { useState } from "react";
-import './LeftBar.css'
+import "./LeftBar.css";
+import {} from "react-icons/fa";
+import { useTheme } from "../../ThemeContext";
+
 const apiURL = "https://restcountries.com/v3.1";
 
 const LeftBar = ({ onSelect }) => {
   const [error, setError] = useState("");
-
-  const selectHandler =async (regionName) => {
+  const { isDarkMode } = useTheme();
+  const selectHandler = async (regionName) => {
     try {
       const res = await fetch(`${apiURL}/region/${regionName}`);
       if (!res.ok) throw new Error("Not found!");
       const data = await res.json();
-      onSelect(regionName,data);
+      onSelect(data);
     } catch (error) {
       setError(error.message);
     }
   };
 
- 
   return (
     <ul>
-      <li className="option" onClick={() => selectHandler("Africa")}>
+      <li
+        className={`option ${
+          isDarkMode ? "left-dark-mode" : "left-light-mode"
+        }`}
+        onClick={() => selectHandler("Africa")}
+      >
         Africa
       </li>
-      <li className="option" onClick={() => selectHandler("America")}>
+      <li
+        className={`option ${
+          isDarkMode ? "left-dark-mode" : "left-light-mode"
+        }`}
+        onClick={() => selectHandler("America")}
+      >
         America
       </li>
-      <li className="option" onClick={() => selectHandler("Asia")}>
+      <li
+        className={`option ${
+          isDarkMode ? "left-dark-mode" : "left-light-mode"
+        }`}
+        onClick={() => selectHandler("Asia")}
+      >
         Asia
       </li>
-      <li className="option" onClick={() => selectHandler("Europe")}>
+      <li
+        className={`option ${
+          isDarkMode ? "left-dark-mode" : "left-light-mode"
+        }`}
+        onClick={() => selectHandler("Europe")}
+      >
         Europe
       </li>
-      <li className="option" onClick={() => selectHandler("Oceania")}>
+      <li
+        className={`option ${
+          isDarkMode ? "left-dark-mode" : "left-light-mode"
+        }`}
+        onClick={() => selectHandler("Oceania")}
+      >
         Oceania
       </li>
     </ul>

@@ -4,21 +4,17 @@
   gap: 2rem;
 }
 
-.regionName{
-  text-align: center;
-    font-size: 2em;
-     text-transform: uppercase;
-  color: #fff;
-letter-spacing: 1px;
-  margin-bottom: 20px; 
-}
-
 .country__card {
-  width: 400px;
+  width: 380px;
   border-radius: 5px;
   display: flex;
-  background: hsl(209, 23%, 22%);
-  color: #fff;
+}
+.country-dark-mode{
+  background: #d2e3c86d;
+  color:black
+}
+.country-light-mode{
+background: #0d1c22;
 }
 .country__card:hover {
   transform: scale(1.05);
@@ -31,9 +27,7 @@ letter-spacing: 1px;
   margin: 10px;
 }
 
-.all__country__wrapper {
-    margin: 100px 200px;
-}
+
 
 .country__data {
   padding: 10px;
@@ -45,11 +39,9 @@ letter-spacing: 1px;
 
 .country__data h6 {
     font-weight: 400;
-  opacity: 80%;
 }
 
 .country__bottom h4 {
-  color: #fff;
   text-align: center;
   margin-top: 15px;
 }

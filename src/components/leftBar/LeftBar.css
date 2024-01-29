@@ -3,7 +3,7 @@ ul {
   width: 180px;
   padding: 0;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   border-radius: 4px;
   overflow: hidden;
   margin-top: 100px;
@@ -12,18 +12,18 @@ ul {
 
 li {
   cursor: pointer;
-  padding: 20px  20px;
+  padding: 20px 20px;
   font-size: 20px;
   height: 73px;
   transition: background-color 0.3s ease;
-  color: #fff;
-}
-
-li:hover {
-  background: hsl(209, 23%, 22%);
 }
 
 .option {
   font-weight: bold;
-  color: #fff; /* Set the text color to white */
+}
+.left-dark-mode:hover {
+    background: #d2e3c86d;
+}
+.left-light-mode:hover {
+    background: #0d1c22;
 }

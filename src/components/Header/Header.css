@@ -1,43 +1,61 @@
 .header {
   width: 100%;
-  height: 70px;
-  line-height: 70px;
   position: fixed;
-  top: 0;
-  left: 0;
-  background: hsl(207, 34%, 18%);
-  padding:15px 30%;
-  z-index: 11;
+  padding:15px 15px;
   display: flex;
-  justify-content: center;
+}
+.dark-mode{
+    background: #040D12;
+    color:white;
+}
+.dark-mode div .search-container{
+    background-color:#091922;
+}
+.dark-mode div div .input{
+color: white;
+}
+
+.light-mode{
+    background: #B2C8BA;
+}
+.light-mode div .search-container{
+    background-color:#D2E3C8;
+}
+
+.container{
+     display: flex;
+     justify-content:space-between;
+     margin:0 100px;
+     width:100%;
 }
 .search-container{
-    background-color:white;
     width:100%;
     border-radius:10px;
     height: 2.5rem;
     padding:0 15px;
-    box-shadow:0px 0px 8px #ddd;
     display:flex;
     align-items:center;
+}
+.theme{
+    display:flex;
+    cursor: pointer;
+    align-items: center;
+    gap:10px;
 }
 .header h5 {
   display: flex;
   align-items: center;
   font-size: 1.3rem;
-  color: #fff;
 }
 input {
   background-color:transparent;
   border:none;
   height:100%;
   font-size:1.25rem;
+  padding:0 10px;
   width:100%;
   margin-left:10px;
 }
 input:focus{
     outline:none;
-}
-::placeholder {
-  color: #332e2e;
 }
