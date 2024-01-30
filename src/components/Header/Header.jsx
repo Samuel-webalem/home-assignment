@@ -6,12 +6,21 @@ import { useError } from "../../ErrorContext";
 
 const apiURL = "https://restcountries.com/v3.1";
 
+/* The code is defining a functional component called `Header` that represents the header section of a
+web page. It takes a prop called `onSelect` which is a function that will be called when a country
+is selected. */
 export default function Header({ onSelect }) {
   const [countryName, setInput] = useState("");
   const { setErrorMsg, clearError } = useError();
   const { toggleTheme, isDarkMode } = useTheme();
   const [sortOption, setSortOption] = useState("Relevant");
 
+  /**
+   * The function validates if an input is empty and displays an error message if it is.
+   * @returns The function `validateInput` returns a boolean value. It returns `true` if the input is
+   * not empty or only contains whitespace characters, and it returns `false` if the input is empty or
+   * only contains whitespace characters.
+   */
   const validateInput = (input) => {
     if (!input.trim()) {
       setErrorMsg("Please enter a country name");
@@ -22,6 +31,12 @@ export default function Header({ onSelect }) {
     return true;
   };
 
+  /**
+   * The submitHandler function is an asynchronous function that fetches data from an API based on a
+   * country name input, and handles errors if the data is not found or if there is an error fetching
+   * the data.
+   * @returns The function `submitHandler` does not explicitly return anything.
+   */
   const submitHandler = async () => {
     if (!validateInput(countryName)) {
       try {
@@ -52,10 +67,13 @@ export default function Header({ onSelect }) {
     }
   };
 
+ /**
+  * The handleChange function updates the input value and either fetches all countries or calls the
+  * submitHandler function based on the input value.
+  */
   const handleChange = async (value) => {
     setInput(value);
     if (value.trim() === "") {
-      // Clear error when the input is empty
       clearError();
       try {
         const allCountriesRes = await fetch(`${apiURL}/all`);
@@ -66,11 +84,14 @@ export default function Header({ onSelect }) {
         console.error("Error fetching all countries:", error);
       }
     } else {
-      // Validate and submit
       submitHandler();
     }
   };
 
+ /**
+  * The handleClear function clears the input, clears any error messages, and fetches data for all
+  * countries.
+  */
   const handleClear = async () => {
     setInput("");
     clearError();
@@ -85,6 +106,10 @@ export default function Header({ onSelect }) {
     }
   };
 
+ /**
+  * The function `handleSortChange` fetches data from an API, sorts it based on the selected value, and
+  * then updates the state with the sorted data.
+  */
   const handleSortChange = async (value) => {
     try {
       const res = await fetch(`${apiURL}/all`);
