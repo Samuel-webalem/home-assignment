@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import "./countries.css";
 import { useTheme } from "../../ThemeContext";
 
-const Countries = ({ countriesData, isLoading }) => {
+const Countries = ({ countriesData, isLoading, onselect }) => {
   const { isDarkMode } = useTheme();
   const [loading, setLoading] = useState(true);
+  const [info, setInfo] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -15,7 +16,7 @@ const Countries = ({ countriesData, isLoading }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (countriesData.length === 0 && loading) {
+  if (loading) {
     return (
       <section className="all__country__wrapper">
         <div className="loading-spinner"></div>
@@ -35,6 +36,10 @@ const Countries = ({ countriesData, isLoading }) => {
     return isDarkMode ? "country-dark-mode" : "country-light-mode";
   };
 
+  const infoHandler = (country) => {
+    onselect(country);
+  };
+
   return (
     <section className="all__country__wrapper">
       <section className="country__bottom">
@@ -43,7 +48,13 @@ const Countries = ({ countriesData, isLoading }) => {
             key={country.name.common}
             to={`/country/${country.name.common}`}
           >
-            <div className={`country__card ${getCountryCardClass()}`}>
+            <div
+              className={`country__card ${getCountryCardClass()}`}
+              onClick={() => {
+                setInfo(country);
+                infoHandler(country);
+              }}
+            >
               <div className="country__img">
                 <img src={country.flags.png} alt="" />
               </div>

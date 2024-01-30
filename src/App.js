@@ -21,6 +21,8 @@ async function fetchData() {
 
 function App() {
   const [countriesData, setCountriesData] = useState([]);
+  const [countriInfo, setCountriInfo] = useState([]);
+
   const [error, setError] = useState("");
   const { isDarkMode } = useTheme();
 
@@ -37,7 +39,9 @@ function App() {
   const searchCountry = async (data) => {
     setCountriesData(data);
   };
-
+const infoHandl = async (data) => {
+  setCountriInfo(data);
+};
   return (
     <>
       <div className="top">
@@ -56,12 +60,12 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={<Countries countriesData={countriesData} />}
+                element={<Countries countriesData={countriesData} onselect={infoHandl}/>}
               />
               <Route
                 path="/country/:countryName"
                 className="info"
-                element={<CountryInfo />}
+                element={<CountryInfo countriInfo={ countriInfo} />}
               />
             </Routes>
           </Router>

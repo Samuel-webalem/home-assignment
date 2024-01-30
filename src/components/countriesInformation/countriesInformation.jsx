@@ -1,34 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useTheme } from "../../ThemeContext";
 import "./countriesInformation.css";
 
-const apiURL = "https://restcountries.com/v3.1";
 
-const CountryInfo = () => {
-  const [country, setCountry] = useState([]);
-  const { countryName } = useParams();
-  const [error, setError] = useState([]);
+const CountryInfo = ({ countriInfo }) => {
+  const [country, setCountry] = useState(null);
   const { isDarkMode } = useTheme();
 
   useEffect(() => {
-    const getCountryByName = async () => {
-      try {
-        const res = await fetch(`${apiURL}/name/${countryName}`);
-
-        if (!res.ok) throw new Error("Could not be found!");
-
-        const data = await res.json();
-
-        setCountry(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
-    getCountryByName();
-  }, [countryName]);
+    if (countriInfo && typeof countriInfo === "object") {
+      setCountry(countriInfo);
+    } else {
+      setCountry(null);
+    }
+  }, [countriInfo]);
 
   return (
     <div
@@ -44,19 +31,18 @@ const CountryInfo = () => {
         />
       </Link>
 
-      {country?.map((country, index) => (
+      {country && (
         <div
           className={`country__info__container ${
             isDarkMode ? "countryinfo-dark-mode" : "countryinfo-light-mode"
           }`}
-          key={index}
         >
           <div className="country__info-img">
-            <img src={country.flags.png} alt={country.name.common} />
+            <img src={country.flags?.png} alt={country.name?.common} />
           </div>
 
           <div className="country__info">
-            <h3>{country.name.common}</h3>
+            <h3>{country.name?.common}</h3>
 
             <div className="country__info-left">
               <h5>
@@ -76,12 +62,16 @@ const CountryInfo = () => {
               </h5>
               <h5>
                 Languages:{" "}
-                <span>{Object.values(country.languages).join(", ")}</span>
+                <span>
+                  {country.languages
+                    ? Object.values(country.languages).join(", ")
+                    : ""}
+                </span>
               </h5>
             </div>
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 };
