@@ -13,7 +13,7 @@ const Countries = ({ countriesData, isLoading, onselect }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -35,35 +35,42 @@ const Countries = ({ countriesData, isLoading, onselect }) => {
 
   return (
     <section className="all__country__wrapper">
-      <section className="country__bottom">
-        {Array.isArray(countriesData) ? (
-          countriesData.map((country) => (
-            <Link
-              key={country.name.common}
-              to={`/country/${country.name.common}`}
-            >
-              <div
-                className={`country__card ${getCountryCardClass()}`}
-                onClick={() => {
-                  setInfo(country);
-                  infoHandler(country);
-                }}
+      {loading && (
+        <div className="loading-spinner-container">
+          <div className="loading-spinner"></div>
+        </div>
+      )}
+      {!loading && (
+        <section className="country__bottom">
+          {Array.isArray(countriesData) ? (
+            countriesData.map((country) => (
+              <Link
+                key={country.name.common}
+                to={`/country/${country.name.common}`}
               >
-                <div className="country__img">
-                  <img src={country.flags.png} alt="" />
+                <div
+                  className={`country__card ${getCountryCardClass()}`}
+                  onClick={() => {
+                    setInfo(country);
+                    infoHandler(country);
+                  }}
+                >
+                  <div className="country__img">
+                    <img src={country.flags.png} alt="" />
+                  </div>
+                  <div className="country__data">
+                    <h3>{country.name.common}</h3>
+                    <h6>Region: {country.region}</h6>
+                    <h6>Capital: {country.capital}</h6>
+                  </div>
                 </div>
-                <div className="country__data">
-                  <h3>{country.name.common}</h3>
-                  <h6>Region: {country.region}</h6>
-                  <h6>Capital: {country.capital}</h6>
-                </div>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <p className="error-message">{error.message}</p>
-        )}
-      </section>
+              </Link>
+            ))
+          ) : (
+            <p className="error-message">{error.message}</p>
+          )}
+        </section>
+      )}
     </section>
   );
 };
