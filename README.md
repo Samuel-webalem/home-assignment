@@ -21,7 +21,7 @@ Installation
 Usage
 
 1. Run the application: `npm start`
-2. Open your browser and visit `http://localhost:3000` to explore the Country Information React Web App.
+2. Open your browser and visit `https://fineto-assignment-samuelweb.netlify.app/` to explore the Country Information React Web App.
 
 Folder Structure
 
