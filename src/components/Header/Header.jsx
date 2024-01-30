@@ -2,37 +2,36 @@ import React, { useState } from "react";
 import "./Header.css";
 import { FaSearch, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import { useTheme } from "../../ThemeContext";
+import { useError } from "../../ErrorContext";
 
 const apiURL = "https://restcountries.com/v3.1";
 
-export default function Header({ onSelect, onThemeChange }) {
+export default function Header({ onSelect }) {
   const [countryName, setInput] = useState("");
-  const [error, setError] = useState({ status: false, message: "" });
-  const [sortOption, setSortOption] = useState("Relevant");
+  const { setErrorMsg, clearError } = useError();
   const { toggleTheme, isDarkMode } = useTheme();
+  const [sortOption, setSortOption] = useState("Relevant");
 
   const validateInput = (input) => {
     if (!input.trim()) {
-      setError({
-        status: true,
-        message: "Please enter a country name",
-      });
+      setErrorMsg("Please enter a country name");
       return false;
     }
 
-    setError({
-      status: false,
-      message: "",
-    });
-
+    clearError();
     return true;
   };
 
   const submitHandler = async () => {
     if (!validateInput(countryName)) {
-      const allCountriesRes = await fetch(`${apiURL}/all`);
-      const allCountriesData = await allCountriesRes.json();
-      onSelect(allCountriesData);
+      try {
+        const allCountriesRes = await fetch(`${apiURL}/all`);
+        const allCountriesData = await allCountriesRes.json();
+        onSelect(allCountriesData);
+      } catch (error) {
+        setErrorMsg("Error fetching all countries");
+        console.error("Error fetching all countries:", error);
+      }
       return;
     }
 
@@ -40,49 +39,53 @@ export default function Header({ onSelect, onThemeChange }) {
       const res = await fetch(`${apiURL}/name/${countryName}`);
 
       if (!res.ok) {
-        setError({
-          status: true,
-          message: "Country not found!",
-        });
-        onSelect([]);
+        setErrorMsg("Country not found!");
+        onSelect({ status: true, message: "Country not found!" });
         return;
       }
-
-      setError({
-        status: false,
-        message: "",
-      });
 
       const data = await res.json();
       onSelect(data);
     } catch (error) {
-      setError({
-        status: true,
-        message: error.message,
-      });
+      setErrorMsg("Error fetching country by name");
+      console.error("Error fetching country by name:", error);
     }
   };
 
   const handleChange = async (value) => {
     setInput(value);
-    submitHandler();
+    if (value.trim() === "") {
+      // Clear error when the input is empty
+      clearError();
+      try {
+        const allCountriesRes = await fetch(`${apiURL}/all`);
+        const allCountriesData = await allCountriesRes.json();
+        onSelect(allCountriesData);
+      } catch (error) {
+        setErrorMsg("Error fetching all countries");
+        console.error("Error fetching all countries:", error);
+      }
+    } else {
+      // Validate and submit
+      submitHandler();
+    }
   };
 
   const handleClear = async () => {
     setInput("");
-    setError({
-      status: false,
-      message: "",
-    });
+    clearError();
 
-    const allCountriesRes = await fetch(`${apiURL}/all`);
-    const allCountriesData = await allCountriesRes.json();
-    onSelect(allCountriesData);
+    try {
+      const allCountriesRes = await fetch(`${apiURL}/all`);
+      const allCountriesData = await allCountriesRes.json();
+      onSelect(allCountriesData);
+    } catch (error) {
+      setErrorMsg("Error fetching all countries");
+      console.error("Error fetching all countries:", error);
+    }
   };
 
   const handleSortChange = async (value) => {
-    setSortOption(value);
-
     try {
       const res = await fetch(`${apiURL}/all`);
       let data = await res.json();
@@ -98,8 +101,10 @@ export default function Header({ onSelect, onThemeChange }) {
 
       onSelect(data);
     } catch (error) {
+      setErrorMsg("Error fetching and sorting countries");
       console.error("Error fetching and sorting countries:", error);
     }
+    setSortOption(value);
   };
 
   return (

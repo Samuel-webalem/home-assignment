@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./countries.css";
 import { useTheme } from "../../ThemeContext";
+import { useError } from "../../ErrorContext";
 
 const Countries = ({ countriesData, isLoading, onselect }) => {
   const { isDarkMode } = useTheme();
+  const { error, clearError, setErrorMsg } = useError();
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState("");
 
@@ -16,21 +18,12 @@ const Countries = ({ countriesData, isLoading, onselect }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return (
-      <section className="all__country__wrapper">
-        <div className="loading-spinner"></div>
-      </section>
-    );
-  }
-
-  if (!Array.isArray(countriesData) || countriesData.length === 0) {
-    return (
-      <section className="all__country__wrapper">
-        <p className="error-message">No countries data available.</p>
-      </section>
-    );
-  }
+  useEffect(() => {
+    if (!Array.isArray(countriesData) || countriesData.length === 0) {
+      clearError();
+      setErrorMsg("No countries data available.");
+    }
+  }, [countriesData, clearError, setErrorMsg]);
 
   const getCountryCardClass = () => {
     return isDarkMode ? "country-dark-mode" : "country-light-mode";
@@ -43,29 +36,33 @@ const Countries = ({ countriesData, isLoading, onselect }) => {
   return (
     <section className="all__country__wrapper">
       <section className="country__bottom">
-        {countriesData.map((country) => (
-          <Link
-            key={country.name.common}
-            to={`/country/${country.name.common}`}
-          >
-            <div
-              className={`country__card ${getCountryCardClass()}`}
-              onClick={() => {
-                setInfo(country);
-                infoHandler(country);
-              }}
+        {Array.isArray(countriesData) ? (
+          countriesData.map((country) => (
+            <Link
+              key={country.name.common}
+              to={`/country/${country.name.common}`}
             >
-              <div className="country__img">
-                <img src={country.flags.png} alt="" />
+              <div
+                className={`country__card ${getCountryCardClass()}`}
+                onClick={() => {
+                  setInfo(country);
+                  infoHandler(country);
+                }}
+              >
+                <div className="country__img">
+                  <img src={country.flags.png} alt="" />
+                </div>
+                <div className="country__data">
+                  <h3>{country.name.common}</h3>
+                  <h6>Region: {country.region}</h6>
+                  <h6>Capital: {country.capital}</h6>
+                </div>
               </div>
-              <div className="country__data">
-                <h3>{country.name.common}</h3>
-                <h6>Region: {country.region}</h6>
-                <h6>Capital: {country.capital}</h6>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))
+        ) : (
+          <p className="error-message">{error.message}</p>
+        )}
       </section>
     </section>
   );
