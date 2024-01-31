@@ -14,7 +14,7 @@ The **Country Information React Web App** is a dynamic platform designed to prov
 
 ## 🛠️ Installation
 
-1. **Clone the repository:** `git clone [repository-url]`
+1. **Clone the repository:** `git clone https://github.com/Samuel-webalem/home-assignment`
 2. **Navigate to the project directory:** `cd country-information-react-app`
 3. **Install dependencies:** `npm install`
 
