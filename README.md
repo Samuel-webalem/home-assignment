@@ -21,7 +21,7 @@ The **Country Information React Web App** is a dynamic platform designed to prov
 ## 🌐 Usage
 
 1. **Run the application:** `npm start`
-2. **Open your browser:** Visit `https://app.netlify.com/sites/fineto-assignment-samuelweb/overview` to explore the Country Information React Web App.
+2. **Open your browser:** Visit `https://fineto-assignment-samuelweb.netlify.app/` to explore the Country Information React Web App.
 
 ## 📁 Folder Structure
 
